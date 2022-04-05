@@ -133,4 +133,29 @@ $(".search-btn").click( function(event) {
     event.preventDefault();
 
     let cityName = $(".city-search").val();
+
+    var cityArray = [];
+    cityArray.push(cityName);
+
+    localStorage.setItem('city', JSON.stringify(cityArray));
     
+    
+
+    searchCity(cityName);
+    loadPage();
+});
+
+function loadPage() {
+    var lastSearch = JSON.parse(localStorage.getItem("city"));
+    var searchDiv = $("<button class = 'btn city-btn'>").text(lastSearch);
+    var psearch = $("<div id = 'city'>");
+    psearch.append(searchDiv);
+    $("#city-button-container").prepend(psearch);
+}
+
+$("#city-button-container").on('click', '.btn', function (event) {
+    event.preventDefault();
+    console.log($(this).text());
+    searchCity($(this).text());
+
+});
