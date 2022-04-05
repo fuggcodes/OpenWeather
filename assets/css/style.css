@@ -1,3 +1,4 @@
+/* header styling */
 .title-header {
     width: 100%;
     text-align: center;
@@ -9,6 +10,7 @@ h1 {
     padding: 10px;
 }
 
+/* city search styling */
 .city-container {
     background-color: rgb(185, 185, 185);
     padding-left: 20px;
@@ -24,6 +26,7 @@ h1 {
     box-shadow: 0 0 2px 2px;
 }
 
+/* current city styling */
 .city-display {
     width: 100%;
     border: 1px solid #eceff1;
@@ -32,6 +35,7 @@ h1 {
     padding: 10px;
 }
 
+/* future weather styling */
 #future-weather-container {
     width: 100%;
     padding: 10px;
