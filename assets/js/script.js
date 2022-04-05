@@ -129,3 +129,8 @@ function searchCity(cityName) {
 }
 loadPage();
 
+$(".search-btn").click( function(event) {
+    event.preventDefault();
+
+    let cityName = $(".city-search").val();
+    
