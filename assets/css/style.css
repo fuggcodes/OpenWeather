@@ -31,3 +31,37 @@ h1 {
     rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
     padding: 10px;
 }
+
+#future-weather-container {
+    width: 100%;
+    padding: 10px;
+}
+.future-info {
+    background-color: rgb(12, 82, 3);
+    color: white;
+    box-shadow: 0 0 5px 2px;
+    margin: 5px;
+}
+.uv.btn {
+    width: 50px;
+}
+
+.safe-uv {
+    background-color: red;
+}
+
+.warning-uv {
+    background-color: yellow;
+}
+
+.danger-uv {
+    background-color: orange;
+}
+
+.big-danger-uv {
+    background-color: darkmagenta;
+}
+
+.panic-uv {
+    background-color: pink;
+}
