@@ -38,4 +38,10 @@ function searchCity(cityName) {
             var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
             currentIcon.attr("style", "height: 60px; width: 60px");
         }
+
+        currentInfoDiv.append(displayDate, currentIcon, temp, hum, wind);
+        $(".city-display").html(currentInfoDiv);
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+
         
