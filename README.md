@@ -17,8 +17,7 @@ Bootstrap
 
 ## ScreenShot
 
-![Starting Page](./assets/startscreen.png)
+![Weather for East Brunswick, NJ](/OpenWeather/assets/images/screen2.png)
 
-![Questions](./assets/questions.png)
+![Weather for New York](/OpenWeather/assets/images/screen1.png)
 
-![Scores](./assets/scores.png)
