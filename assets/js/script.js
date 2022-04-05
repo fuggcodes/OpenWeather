@@ -44,4 +44,16 @@ function searchCity(cityName) {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
-        
+        var uvUrlLink = "https://api.openweathermap.org/data/2.5/uvi?&appid=ecc0be5fd92206da3aa90cc41c13ca56&lat=" + lat + "&lon=" + lon;
+
+        $.ajax({
+            url: uvUrlLink,
+            method: "GET"
+        }).then(function(response2) {
+            console.log(response2);
+            $('#uv-index').empty();
+            var uvResult = response2.value;
+            console.log(uvResult);
+            var uvlEl = $("<p>").text("UV Index: " + uvResult);
+
+            
