@@ -1,8 +1,10 @@
 // function search city 
+// using jquery/javascript
+// search city, get data from api
 function searchCity(cityName) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=0e92073c3c58ca34ad6188f84fccee10";
     var queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=0e92073c3c58ca34ad6188f84fccee10";
-
+// fetching data
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -11,7 +13,7 @@ function searchCity(cityName) {
         var currentDate = " (" + moment().format("MM/DD/YYYY") + ") ";
 
         var currentInfoDiv = $("<div>");
-
+// getting data
         var cityNameH = $("<h2>").text(response.name);
         var displayDate = cityNameH.append(" " + currentDate);
         var temp = $("<p>").text("Tempraturer: " + response.main.temp);
@@ -49,7 +51,7 @@ function searchCity(cityName) {
 
         // get uvindex from api
         var uvUrlLink = "https://api.openweathermap.org/data/2.5/uvi?&appid=ecc0be5fd92206da3aa90cc41c13ca56&lat=" + lat + "&lon=" + lon;
-
+// fetching data
         $.ajax({
             url: uvUrlLink,
             method: "GET"
@@ -81,7 +83,7 @@ function searchCity(cityName) {
 
         });
     });
-
+// fetching data
     $.ajax({
         url: queryURLforcast,
         method: 'GET'
@@ -90,7 +92,7 @@ function searchCity(cityName) {
         $("#future-weather-container").empty();
         for (var i = 0; i < results.length; i += 8) {
             var fiveDayDiv = $("<div class='future-info'>");
-
+// getting data from api
             var date = results[i].dt_txt;
             var setDate = date.substr(0, 10)
             var temp = results[i].main.temp;
@@ -121,7 +123,7 @@ function searchCity(cityName) {
                 var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
                 icon.attr("style", "height: 40px; width: 40px");
             }
-
+// display 5 day
             fiveDayDiv.append(hFiveDate);
             fiveDayDiv.append(icon);
             fiveDayDiv.append(pTemp);
@@ -134,6 +136,7 @@ function searchCity(cityName) {
 }
 loadPage();
 
+// search history
 // search button click
 $(".search-btn").click( function(event) {
     event.preventDefault();
@@ -152,6 +155,7 @@ $(".search-btn").click( function(event) {
     loadPage();
 });
 
+// send to local storage for persistent data 
 function loadPage() {
     var lastSearch = JSON.parse(localStorage.getItem("city"));
     var searchDiv = $("<button class = 'btn city-btn'>").text(lastSearch);
@@ -159,7 +163,7 @@ function loadPage() {
     psearch.append(searchDiv);
     $("#city-button-container").prepend(psearch);
 }
-
+// event listener button 
 $("#city-button-container").on('click', '.btn', function (event) {
     event.preventDefault();
     console.log($(this).text());
