@@ -56,4 +56,76 @@ function searchCity(cityName) {
             console.log(uvResult);
             var uvlEl = $("<p>").text("UV Index: " + uvResult);
 
-            
+            if(response2.value < 3) {
+                $("#uv-index").addClass("safe-uv").removeClass("warning-uv danger-uv big-danger-uv panic-uv");
+            }
+            else if(response2.value < 6) {
+                $("#uv-index").addClass("warning-uv").removeClass("safe-uv danger-uv big-danger-uv panic-uv");
+            }
+            else if(response2.value < 8){
+                $("#uv-index").addClass("danger-uv").removeClass("warning-uv safe-uv big-danger-uv panic-uv");
+            }
+            else if(response2.value < 11){
+                $("#uv-index").addClass("big-danger-uv").removeClass("warning-uv danger-uv safe-uv panic-uv");
+            }
+            else{
+                $("#uv-index").addClass("panic-uv").removeClass("warning-uv danger-uv big-danger-uv safe-uv");
+            }
+
+            $("#uv-index").html(uvlEl);
+
+        });
+    });
+
+    $.ajax({
+        url: queryURLforcast,
+        method: 'GET'
+    }).then(function (response) {
+        var results = response.list;
+        $("#future-weather-container").empty();
+        for (var i = 0; i < results.length; i += 8) {
+            var fiveDayDiv = $("<div class='future-info'>");
+
+            var date = results[i].dt_txt;
+            var setDate = date.substr(0, 10)
+            var temp = results[i].main.temp;
+            var hum = results[i].main.humidity;
+
+            var hFiveDate = $("<h5 class='card-title'>").text(setDate);
+            var pTemp = $("<p class='card-text'>").text("Temp: " + temp);;
+            var pHum = $("<p class='card-text'>").text("Humidity " + hum);;
+
+            var weather = results[i].weather[0].main
+
+            if (weather === "Rain") {
+                var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
+                icon.attr("style", "height: 40px; width: 40px");
+            } else if (weather === "Clouds") {
+                var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/03d.png");
+                icon.attr("style", "height: 40px; width: 40px");
+            }
+            else if (weather === "Clear") {
+                var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/01d.png");
+                icon.attr("style", "height: 40px; width: 40px");
+            }
+            else if (weather === "Drizzle") {
+                var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/10d.png");
+                icon.attr("style", "height: 40px; width: 40px");
+            }
+            else if (weather === "Snow") {
+                var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
+                icon.attr("style", "height: 40px; width: 40px");
+            }
+
+            fiveDayDiv.append(hFiveDate);
+            fiveDayDiv.append(icon);
+            fiveDayDiv.append(pTemp);
+            fiveDayDiv.append(pHum);
+            $("#future-weather-container").append(fiveDayDiv);
+        }
+
+    });
+
+}
+loadPage();
+
