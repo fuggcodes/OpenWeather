@@ -1,3 +1,4 @@
+// function search city 
 function searchCity(cityName) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=0e92073c3c58ca34ad6188f84fccee10";
     var queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=0e92073c3c58ca34ad6188f84fccee10";
@@ -18,6 +19,7 @@ function searchCity(cityName) {
         var wind = $("<p>").text("Wind Speed: " + response.wind.speed);
         var currentweather = response.weather[0].main;
 
+        // displays weather icon based off weather
         if (currentweather === "Rain") {
             var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
             currentIcon.attr("style", "height: 60px; width: 60px");
@@ -39,11 +41,13 @@ function searchCity(cityName) {
             currentIcon.attr("style", "height: 60px; width: 60px");
         }
 
+        // append all info for div
         currentInfoDiv.append(displayDate, currentIcon, temp, hum, wind);
         $(".city-display").html(currentInfoDiv);
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
+        // get uvindex from api
         var uvUrlLink = "https://api.openweathermap.org/data/2.5/uvi?&appid=ecc0be5fd92206da3aa90cc41c13ca56&lat=" + lat + "&lon=" + lon;
 
         $.ajax({
@@ -56,6 +60,7 @@ function searchCity(cityName) {
             console.log(uvResult);
             var uvlEl = $("<p>").text("UV Index: " + uvResult);
 
+            // change color of uv based off value
             if(response2.value < 3) {
                 $("#uv-index").addClass("safe-uv").removeClass("warning-uv danger-uv big-danger-uv panic-uv");
             }
@@ -129,11 +134,13 @@ function searchCity(cityName) {
 }
 loadPage();
 
+// search button click
 $(".search-btn").click( function(event) {
     event.preventDefault();
 
     let cityName = $(".city-search").val();
 
+// save search to local storage
     var cityArray = [];
     cityArray.push(cityName);
 
